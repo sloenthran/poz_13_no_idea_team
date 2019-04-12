@@ -7,7 +7,7 @@ import org.junit.Test;
 public class TestGenerateGeoIndex {
     @Test
     public void testRunnable() {
-        GenerateGeoIndex geoIndex = new GenerateGeoIndex("Grunwaldzka+182", "Poznań", "60-309");
+        GenerateGeoIndex geoIndex = new GenerateGeoIndex("Grunwaldzka 182", "Poznań", "60-309");
         ReturnData data = geoIndex.generate();
 
         Assert.assertEquals(52.391243, data.getX(), 0.000001);
