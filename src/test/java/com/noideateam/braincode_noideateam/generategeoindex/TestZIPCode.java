@@ -3,7 +3,7 @@ package com.noideateam.braincode_noideateam.generategeoindex;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class testZIPCode {
+public class TestZIPCode {
     @Test
     public void testBadValue() {
         ZIPCode zipCode = new ZIPCode("123");

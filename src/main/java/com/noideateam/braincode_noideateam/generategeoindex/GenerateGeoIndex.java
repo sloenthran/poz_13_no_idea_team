@@ -11,5 +11,7 @@ public class GenerateGeoIndex {
         this.zipCode = new ZIPCode(zipCode);
     }
 
-    pu
+    public void askGoogleAPI() {
+
+    }
 }
