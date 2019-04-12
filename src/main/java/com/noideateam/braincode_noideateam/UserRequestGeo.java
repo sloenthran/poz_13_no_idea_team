@@ -1,11 +1,11 @@
 package com.noideateam.braincode_noideateam;
 
-public class UserRequest {
+public class UserRequestGeo {
     private String login;
     private float geoLength;
     private float geoWidth;
 
-    public UserRequest(String login, float geoLength, float geoWidth){
+    public UserRequestGeo(String login, float geoLength, float geoWidth){
         this.login = login;
         this.geoLength = geoLength;
         this.geoWidth = geoWidth;
