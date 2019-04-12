@@ -1,5 +1,8 @@
 package com.noideateam.braincode_noideateam.generategeoindex;
 
+import com.noideateam.braincode_noideateam.generategeoindex.opencagedata.Query;
+import com.noideateam.braincode_noideateam.generategeoindex.opencagedata.ReturnData;
+
 public class GenerateGeoIndex {
     private String street;
     private String city;
@@ -11,7 +14,12 @@ public class GenerateGeoIndex {
         this.zipCode = new ZIPCode(zipCode);
     }
 
-    public void askGoogleAPI() {
+    public ReturnData askOpenCageData() {
+        Query query = new Query();
+        return query.ask(street + "+" + city + "+" + zipCode.getZipCode());
+    }
 
+    public ReturnData generate() {
+        return this.askOpenCageData();
     }
 }
