@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="semantic.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <script src="main.js"></script>
+</head>
+<body>
+<div class="main-wrap">
+<div class="main-form">
+
+<script>
+    const response = await fetch('http://localhost:8080/all');
+    const myJson = await response.json(); //extract JSON from the http response
+    var str = JSON.stringify(myJson);
+    document.getElementById("result").innerHTML = str;
+</script>
+
+<form class="ui form">
+  <h4 class="ui dividing header">Shipping Information</h4>
+  <div class="field">
+    <label>Name</label>
+    <div class="two fields">
+      <div class="field">
+        <input type="text" id="shipping[name]" placeholder="First Name">
+      </div>
+      <div class="field">
+        <input type="text" id="shipping[last-name]" placeholder="Last Name">
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label>Billing Address</label>
+    <div class="fields">
+      <div class="ten wide field">
+        <input type="text" id="shipping[address]" placeholder="Street Address">
+      </div>
+      <div class="six wide field">
+        <input type="text" id="shipping[city]" placeholder="City">
+      </div>
+      <div class="six wide field">
+        <input type="text" id="shipping[zipcode]" placeholder="Zip Code" pattern="\d\d-\d\d\d" maxlength="6">
+      </div>
+    </div>
+  </div>
+
+  <div class="ui button" tabindex="0" type="submit" onclick="getTest()">Search</div>
+</form>
+
+<div id="result">
+
+</div>
+
+<script>
+
+
+
+const getTest = async () => {
+    var name = document.getElementById("shipping[name]").value;
+    var city = document.getElementById("shipping[city]").value;
+    var zipcode = document.getElementById("shipping[zipcode]").value;
+    var street = document.getElementById("shipping[address]").value;
+    street = street.replace(" ","+");
+
+    // const response = await fetch('http://localhost:8080/request/?chosen_street=Widawska+17&chosen_city=poznan&chosen_zip=61-310');
+    const response = await fetch('http://localhost:8080/request/?chosen_street='+street+'&chosen_city='+city+'&chosen_zip='+zipcode);
+    const myJson = await response.json(); //extract JSON from the http response
+    var str = JSON.stringify(myJson);
+    document.getElementById("result").innerHTML = str;
+}
+
+</script>
+
+
+
+</div>
+</div>
+   
+</body>
+</html>

@@ -1,0 +1,22 @@
+body{
+    background-image: url("images/what-the-hex.png");
+   height: 100%;
+}
+
+.main-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.main-form{
+    display: flex;
+    background-color: #FCFCFC;
+    height: 75%;
+    width: 75%;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
