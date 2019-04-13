@@ -102,6 +102,11 @@ const getTest = async () => {
     const response = await fetch('http://192.168.137.1:8080/request/?chosen_street='+street+'&chosen_city='+city+'&chosen_zip='+zipcode);
     const myJson = await response.json(); //extract JSON from the http response
     var str = '<h4 class="ui dividing header">Result</h4>';
+    if(myJson.status == 404){
+      str += `<div class="ui red basic label">
+      Address not found
+    </div>`
+    }else{
       switch(myJson.betterLocation.shopType){
           case "UPS": color = "brown"; break;
           case "ZABKA": color = "olive"; break;
@@ -118,12 +123,12 @@ const getTest = async () => {
       <div class="detail">${myJson.betterLocation.distance.toFixed(2)}km</div>
       </a>
     `
-    if(myJson.betterLocation.notes != null){
+    if(myJson.betterLocation.notes != ""){
       str += `<div class="ui left pointing blue basic label">
       ${myJson.betterLocation.notes}
     </div>`
     }
-      
+    }
         document.getElementById("result").innerHTML = str;
     
 }
