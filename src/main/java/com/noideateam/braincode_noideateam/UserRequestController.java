@@ -27,6 +27,7 @@ public class UserRequestController {
         return new UserRequestGeo(login, geoLength, geoWidth);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/all")
     List<User> all(){
         return userRepository.findAll();
