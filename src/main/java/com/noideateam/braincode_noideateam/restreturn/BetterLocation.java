@@ -10,16 +10,18 @@ public class BetterLocation {
     private String street;
     private String city;
     private String zip;
+    private String notes;
 
 
 
-    public BetterLocation(String pointName, double distance, boolean suggest, String better_street, String better_city, String better_zip) {
+    public BetterLocation(String pointName, double distance, boolean suggest, String better_street, String better_city, String better_zip, String notes) {
         this.pointName = pointName;
         this.distance = distance;
         this.suggest = suggest;
         this.street = better_street;
         this.city = better_city;
         this.zip = better_zip;
+        this.notes = notes;
     }
 
     public String getPointName() {
@@ -68,5 +70,13 @@ public class BetterLocation {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

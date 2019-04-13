@@ -91,7 +91,7 @@ public class UserRequestController {
 
         if (distanceToChosenPoint > closestPoint.get().getValue()){
             suggest = true;
-            System.out.println("Suggest is true");
+            System.out.println("Suggest is true ");
             return new Location(
                     closestPoint.get().getKey().getName(),
                     closestPoint.get().getValue(),
@@ -101,7 +101,8 @@ public class UserRequestController {
                     chosen_zip,
                     closestPoint.get().getKey().getAddress(),
                     closestPoint.get().getKey().getCity(),
-                    closestPoint.get().getKey().getZipCode()
+                    closestPoint.get().getKey().getZipCode(),
+                    closestPoint.get().getKey().getNotes()
 
             );
         } else{
