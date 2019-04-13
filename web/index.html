@@ -7,32 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="semantic.css">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
 </head>
 <body>
 <div class="main-wrap">
 <div class="main-form">
 
-<script>
-    const response = await fetch('http://localhost:8080/all');
-    const myJson = await response.json(); //extract JSON from the http response
-    var str = JSON.stringify(myJson);
-    document.getElementById("result").innerHTML = str;
-</script>
+
 
 <form class="ui form">
   <h4 class="ui dividing header">Shipping Information</h4>
-  <div class="field">
-    <label>Name</label>
-    <div class="two fields">
-      <div class="field">
-        <input type="text" id="shipping[name]" placeholder="First Name">
-      </div>
-      <div class="field">
-        <input type="text" id="shipping[last-name]" placeholder="Last Name">
-      </div>
-    </div>
-  </div>
+
   <div class="field">
     <label>Billing Address</label>
     <div class="fields">
@@ -51,8 +35,57 @@
   <div class="ui button" tabindex="0" type="submit" onclick="getTest()">Search</div>
 </form>
 
-<div id="result">
+<script>
 
+// let dropdown = document.getElementById("shipping[name]");
+
+//   const getLogins = async () => {
+//   const response = await fetch('http://192.168.137.1:8080/all');
+//   const myJson = await response.json(); //extract JSON from the http response
+//   let option; 
+//     for(let i = 0; i < myJson.length; i++){
+//       option = document.createElement('option');
+//       option.text = myJson[i].login;
+//       option.value = myJson[i].id;
+//       dropdown.add(option);
+//     }
+
+//   }
+//   getLogins();
+</script>
+
+
+<div id="result">
+    <!-- <a class="ui red image label">
+  <img src="images/icons/ico_ORLEN.png">
+  Veronika
+  <div class="detail">Friend</div>
+</a>
+<a class="ui olive image label">
+  <img src="images/icons/ico_ZABKA.png">
+  Veronika
+  <div class="detail">Student</div>
+</a>
+<a class="ui brown image label">
+  <img src="images/icons/ico_UPS.png">
+  Helen
+  <div class="detail">Co-worker</div>
+</a>
+<a class="ui green image label">
+  <img src="images/icons/ico_RUCH.png">
+  Helen
+  <div class="detail">Co-worker</div>
+</a>
+<a class="ui red image label">
+  <img src="images/icons/ico_POCZTA_POLSKA.png">
+    
+  <div class="detail">Co-worker</div>
+</a>
+<a class="ui yellow image label">
+  <img src="images/icons/ico_PACZKOMAT.jpg">
+  Helen
+  <div class="detail">Co-worker</div>
+</a> -->
 </div>
 
 <script>
@@ -60,19 +93,40 @@
 
 
 const getTest = async () => {
-    var name = document.getElementById("shipping[name]").value;
+    // var name = document.getElementById("shipping[name]").value;
     var city = document.getElementById("shipping[city]").value;
     var zipcode = document.getElementById("shipping[zipcode]").value;
     var street = document.getElementById("shipping[address]").value;
     street = street.replace(" ","+");
-
-    // const response = await fetch('http://localhost:8080/request/?chosen_street=Widawska+17&chosen_city=poznan&chosen_zip=61-310');
-    const response = await fetch('http://localhost:8080/request/?chosen_street='+street+'&chosen_city='+city+'&chosen_zip='+zipcode);
+    
+    const response = await fetch('http://192.168.137.1:8080/request/?chosen_street='+street+'&chosen_city='+city+'&chosen_zip='+zipcode);
     const myJson = await response.json(); //extract JSON from the http response
-    var str = JSON.stringify(myJson);
-    document.getElementById("result").innerHTML = str;
-}
+    var str = '<h4 class="ui dividing header">Result</h4>';
+      switch(myJson.betterLocation.shopType){
+          case "UPS": color = "brown"; break;
+          case "ZABKA": color = "olive"; break;
+          case "RUCH": color = "green"; break;
+          case "ORLEN": color = "red"; break;
+          case "POCZTA_POLSKA": color = "red"; break;
+          case "PACZKOMAT": color = "yellow"; break;
+          default: color = "gray"; break;
 
+        }
+      str += `<a class="ui ${color} image label main-label">
+      <img src="images/icons/ico_${myJson.betterLocation.shopType}.png">
+      ${myJson.betterLocation.street} <span style="display:inline-block; width: 10px;"></span>  ${myJson.betterLocation.city} <span style="display:inline-block; width: 10px;"></span> ${myJson.betterLocation.zip} 
+      <div class="detail">${myJson.betterLocation.distance.toFixed(2)}km</div>
+      </a>
+    `
+    if(myJson.betterLocation.notes != null){
+      str += `<div class="ui left pointing blue basic label">
+      ${myJson.betterLocation.notes}
+    </div>`
+    }
+      
+        document.getElementById("result").innerHTML = str;
+    
+}
 </script>
 
 

@@ -20,3 +20,12 @@ body{
     flex-wrap: wrap;
     flex-direction: column;
 }
+
+form{
+    margin-bottom: 1em;
+}
+
+a > .main-label{
+    margin:1em;
+}
+
