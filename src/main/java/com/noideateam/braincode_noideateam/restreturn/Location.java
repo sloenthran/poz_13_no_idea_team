@@ -4,10 +4,12 @@ public class Location {
     private BetterLocation betterLocation;
     private OriginalLocation originalLocation;
     private String shopType;
+    private String deliveryHours;
 
-    public Location(double distance, String original_street, String original_city, String original_zip, String shopType)
+    public Location(double distance, String original_street, String original_city, String original_zip, String shopType, String deliveryHours)
     {
         this.shopType = shopType;
+        this.deliveryHours = deliveryHours;
 
         this.originalLocation = new OriginalLocation(
                 distance,
@@ -28,9 +30,11 @@ public class Location {
             String better_city,
             String better_zip,
             String better_notes,
-            String shopType
+            String shopType,
+            String deliveryHours
     ){
         this.shopType = shopType;
+        this.deliveryHours = deliveryHours;
         this.originalLocation = new OriginalLocation(original_distance, original_street, original_city, original_zip);
         this.betterLocation = new BetterLocation(better_names, better_distance, true, better_street, better_city, better_zip, better_notes);
     }
@@ -65,5 +69,9 @@ public class Location {
         }
 
         return returnType;
+    }
+
+    public String getDeliveryHours() {
+        return this.deliveryHours;
     }
 }

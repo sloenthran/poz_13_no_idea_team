@@ -50,7 +50,8 @@ public class UserRequestController {
                 closestPoint.get().getKey().getAddress(),
                 closestPoint.get().getKey().getCity(),
                 closestPoint.get().getKey().getZipCode(),
-                closestPoint.get().getKey().getType()
+                closestPoint.get().getKey().getType(),
+                closestPoint.get().getKey().getDeliveryHours()
         );
     }
 
@@ -104,10 +105,11 @@ public class UserRequestController {
                     closestPoint.get().getKey().getCity(),
                     closestPoint.get().getKey().getZipCode(),
                     closestPoint.get().getKey().getNotes(),
-                    closestPoint.get().getKey().getType()
+                    closestPoint.get().getKey().getType(),
+                    closestPoint.get().getKey().getDeliveryHours()
             );
         } else{
-            return new Location( distanceToChosenPoint, chosen_street, chosen_city, chosen_zip, null);
+            return new Location( distanceToChosenPoint, chosen_street, chosen_city, chosen_zip, null, null);
         }
     }
 
