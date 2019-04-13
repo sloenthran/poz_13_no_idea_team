@@ -47,10 +47,11 @@ public class UserRequestController {
 
         return new Location(
                 closestPoint.get().getValue(),
-        closestPoint.get().getKey().getAddress(),
+                closestPoint.get().getKey().getAddress(),
                 closestPoint.get().getKey().getCity(),
-                closestPoint.get().getKey().getZipCode())
-        ;
+                closestPoint.get().getKey().getZipCode(),
+                closestPoint.get().getKey().getType()
+        );
     }
 
     @CrossOrigin(origins = "*")
@@ -102,11 +103,11 @@ public class UserRequestController {
                     closestPoint.get().getKey().getAddress(),
                     closestPoint.get().getKey().getCity(),
                     closestPoint.get().getKey().getZipCode(),
-                    closestPoint.get().getKey().getNotes()
-
+                    closestPoint.get().getKey().getNotes(),
+                    closestPoint.get().getKey().getType()
             );
         } else{
-            return new Location( distanceToChosenPoint, chosen_street, chosen_city, chosen_zip);
+            return new Location( distanceToChosenPoint, chosen_street, chosen_city, chosen_zip, null);
         }
     }
 

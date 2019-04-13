@@ -3,33 +3,35 @@ package com.noideateam.braincode_noideateam.restreturn;
 public class Location {
     private BetterLocation betterLocation;
     private OriginalLocation originalLocation;
+    private String shopType;
 
+    public Location(double distance, String original_street, String original_city, String original_zip, String shopType)
+    {
+        this.shopType = shopType;
 
-    public Location(double distance, String original_street, String original_city, String original_zip) {
         this.originalLocation = new OriginalLocation(
-//                name,
                 distance,
                 original_street,
                 original_city,
-                original_zip);
+                original_zip
+        );
     }
 
-    public Location(String better_names,
-                    double better_distance,
-//                    String original_name,
-                    double original_distance,
-                    String original_street,
-                    String original_city,
-                    String original_zip,
-                    String better_street,
-                    String better_city,
-                    String better_zip,
-                    String better_notes
-
-                    ){
+    public Location(
+            String better_names,
+            double better_distance,
+            double original_distance,
+            String original_street,
+            String original_city,
+            String original_zip,
+            String better_street,
+            String better_city,
+            String better_zip,
+            String better_notes,
+            String shopType
+    ){
+        this.shopType = shopType;
         this.originalLocation = new OriginalLocation(original_distance, original_street, original_city, original_zip);
-
-
         this.betterLocation = new BetterLocation(better_names, better_distance, true, better_street, better_city, better_zip, better_notes);
     }
 
@@ -47,5 +49,21 @@ public class Location {
 
     public void setOriginalLocation(OriginalLocation originalLocation) {
         this.originalLocation = originalLocation;
+    }
+
+    public String getShopType() {
+        String returnType;
+
+        switch(shopType) {
+            case "UPS": returnType = "UPS"; break;
+            case "POCZTA_POLSKA_ZABKA": returnType = "ZABKA"; break;
+            case "RUCH": returnType = "RUCH"; break;
+            case "POCZTA_POLSKA_ORLEN": returnType = "ORLEN"; break;
+            case "POCZTA_POLSKA": returnType = "POCZTA_POLSKA"; break;
+            case "PACZKOMAT": returnType = "PACZKOMAT"; break;
+            default: returnType = "null"; break;
+        }
+
+        return returnType;
     }
 }
