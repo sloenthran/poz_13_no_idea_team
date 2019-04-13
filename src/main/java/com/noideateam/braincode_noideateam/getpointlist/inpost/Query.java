@@ -4,7 +4,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class Query {
 
-    public ReturnPointList ask() {
+    public static ReturnPointList ask() {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -16,11 +16,13 @@ public class Query {
         ReturnPointList pointList = new ReturnPointList();
 
         for(Items item : response.getItems()) {
-            pointList.addPoint(item.getLocation().getLatitude(),
+            pointList.addPoint(
+                    item.getLocation().getLatitude(),
                     item.getLocation().getLongtitude(),
                     item.getAdress().getStreet() + " " + item.getAdress().getHouseNumber(),
                     item.getAdress().getCity(),
-                    item.getAdress().getPostCode());
+                    item.getAdress().getPostCode()
+            );
         }
 
         return pointList;

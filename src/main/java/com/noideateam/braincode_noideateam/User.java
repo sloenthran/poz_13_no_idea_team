@@ -1,6 +1,5 @@
 package com.noideateam.braincode_noideateam;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +12,7 @@ public class User {
     private String city;
     private String zip;
 
+    public User(){}
 
     public User(String login, String street, String city, String zip) {
         this.login = login;
@@ -20,10 +20,6 @@ public class User {
         this.city = city;
         this.zip = zip;
     }
-
-    public User(){}
-
-
 
     public Long getId() {
         return id;

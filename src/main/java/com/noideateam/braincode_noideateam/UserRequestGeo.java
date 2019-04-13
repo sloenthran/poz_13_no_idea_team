@@ -11,7 +11,6 @@ public class UserRequestGeo {
         this.geoWidth = geoWidth;
     }
 
-
     public String getLogin() {
         return login;
     }

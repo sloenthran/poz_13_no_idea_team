@@ -4,14 +4,12 @@ import com.javadocmd.simplelatlng.LatLng;
 import com.javadocmd.simplelatlng.LatLngTool;
 import com.javadocmd.simplelatlng.util.LengthUnit;
 import com.opencsv.CSVReader;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Stream;
 
 public class CollectionPoints {
-
     static Vector<CollectionPoint> collectionPoints = new Vector<>();
 
     public CollectionPoints() throws IOException {
@@ -25,11 +23,6 @@ public class CollectionPoints {
             if(r[0].equals("Typ")){ continue; }
             CollectionPoint cp = new CollectionPoint(r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8]);
             collectionPoints.add(cp);
-
-            for (CollectionPoint e : collectionPoints) {
-
-//                System.out.println("Name: " + e.getName() + " (" + e.getLatitude() + ", " + e.getLongitude() + ") ");
-            }
         }
     }
 
@@ -51,8 +44,6 @@ public class CollectionPoints {
         return LatLngTool.distance(sourcePoint, targetPoint, LengthUnit.KILOMETER);
     }
 
-
-
     public static Map<CollectionPoint, Double> collectionPointsInRange(double x, double y, float range){
         Map<CollectionPoint, Double> distances = collectionPointsDistanceToPoint(x, y);
         Map<CollectionPoint, Double> result = new HashMap<>();
@@ -64,19 +55,11 @@ public class CollectionPoints {
         return result;
     }
 
-
     public Optional<Map.Entry<CollectionPoint, Double>> getClosest(double X, double Y){
-
-
 
         Map<CollectionPoint, Double> result= CollectionPoints.collectionPointsInRange(X, Y, 10);
         double min = Collections.min(result.values());
         System.out.println("Min: " + min);
-
-
-//        result.forEach((key,value) -> {
-//            System.out.println("key = " + key.getName() + " " + value);
-//        });
 
         Optional<Map.Entry<CollectionPoint, Double>> something = result.entrySet().stream().min(Map.Entry.comparingByValue());
 

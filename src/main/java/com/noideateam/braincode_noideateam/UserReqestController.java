@@ -26,9 +26,10 @@ public class UserReqestController {
     }
 
     @GetMapping("/requestwithgeo")
-    public UserRequestGeo userRequestGeo(@RequestParam(value = "login", defaultValue = "User") String login,
-                                         @RequestParam(value = "geoLength", defaultValue = "0.0") float geoLength,
-                                         @RequestParam(value = "geoWidth", defaultValue = "0.0") float geoWidth
+    public UserRequestGeo userRequestGeo(
+            @RequestParam(value = "login", defaultValue = "User") String login,
+            @RequestParam(value = "geoLength", defaultValue = "0.0") float geoLength,
+            @RequestParam(value = "geoWidth", defaultValue = "0.0") float geoWidth
     ) {
 
         return new UserRequestGeo(login, geoLength, geoWidth);
