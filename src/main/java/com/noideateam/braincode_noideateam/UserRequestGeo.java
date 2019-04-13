@@ -5,7 +5,7 @@ public class UserRequestGeo {
     private float geoLength;
     private float geoWidth;
 
-    public UserRequestGeo(String login, float geoLength, float geoWidth){
+    public UserRequestGeo(String login, float geoLength, float geoWidth) {
         this.login = login;
         this.geoLength = geoLength;
         this.geoWidth = geoWidth;

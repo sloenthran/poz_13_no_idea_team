@@ -1,5 +1,8 @@
 package com.noideateam.braincode_noideateam;
 
+//import lombok.Data;
+
+
 public class UserRequestAdress {
 
     private String login;
@@ -7,13 +10,15 @@ public class UserRequestAdress {
     private String city;
     private String zip;
 
+
     public UserRequestAdress(String login, String street, String city, String zip) {
         this.login = login;
         this.street = street;
         this.city = city;
         this.zip = zip;
-    }
 
+
+    }
 
     public String getLogin() {
         return login;
