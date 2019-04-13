@@ -7,9 +7,8 @@ import com.opencsv.CSVReader;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class CollectionPoints {
 
@@ -45,6 +44,15 @@ public class CollectionPoints {
         return result;
     }
 
+    public double getDistance(double sourceX, double sourceY, double tagetX, double targetY ){
+        LatLng sourcePoint = new LatLng(sourceX, sourceY);
+        LatLng targetPoint = new LatLng(tagetX, targetY);
+
+        return LatLngTool.distance(sourcePoint, targetPoint, LengthUnit.KILOMETER);
+    }
+
+
+
     public static Map<CollectionPoint, Double> collectionPointsInRange(double x, double y, float range){
         Map<CollectionPoint, Double> distances = collectionPointsDistanceToPoint(x, y);
         Map<CollectionPoint, Double> result = new HashMap<>();
@@ -54,6 +62,36 @@ public class CollectionPoints {
             }
         });
         return result;
+    }
+
+
+    public Optional<Map.Entry<CollectionPoint, Double>> getClosest(double X, double Y){
+
+
+
+        Map<CollectionPoint, Double> result= CollectionPoints.collectionPointsInRange(X, Y, 10);
+        double min = Collections.min(result.values());
+        System.out.println("Min: " + min);
+
+
+//        result.forEach((key,value) -> {
+//            System.out.println("key = " + key.getName() + " " + value);
+//        });
+
+        Optional<Map.Entry<CollectionPoint, Double>> something = result.entrySet().stream().min(Map.Entry.comparingByValue());
+
+        System.out.println("cmp point: "+ something.get().getKey().getName() + "\t"+ something.get().getValue());
+
+        return something;
+
+    }
+
+    public Stream<CollectionPoint> keys(Map<CollectionPoint, Double> map, Double value){
+        return map
+                .entrySet()
+                .stream()
+                .filter(entry -> value.equals(entry.getValue()))
+                .map(Map.Entry::getKey);
     }
 
 }
