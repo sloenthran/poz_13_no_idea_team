@@ -3,13 +3,14 @@ package com.noideateam.braincode_noideateam.restreturn;
 public class Location {
     private BetterLocation betterLocation;
     private OriginalLocation originalLocation;
-    private String shopType;
-    private String deliveryHours;
+//    private String shopType;
+//    private String deliveryHours;
 
+
+
+    //constructor for data without database
     public Location(double distance, String original_street, String original_city, String original_zip, String shopType, String deliveryHours)
     {
-        this.shopType = shopType;
-        this.deliveryHours = deliveryHours;
 
         this.originalLocation = new OriginalLocation(
                 distance,
@@ -19,6 +20,7 @@ public class Location {
         );
     }
 
+    //constructor for suggesting with adress inside database
     public Location(
             String better_names,
             double better_distance,
@@ -33,10 +35,16 @@ public class Location {
             String shopType,
             String deliveryHours
     ){
-        this.shopType = shopType;
-        this.deliveryHours = deliveryHours;
         this.originalLocation = new OriginalLocation(original_distance, original_street, original_city, original_zip);
-        this.betterLocation = new BetterLocation(better_names, better_distance, true, better_street, better_city, better_zip, better_notes);
+        this.betterLocation = new BetterLocation(better_names, better_distance, true, better_street, better_city, better_zip, better_notes, shopType, deliveryHours);
+    }
+
+//    constructor for only request
+    public Location(
+            String pointName, double distance, boolean suggest, String better_street,
+            String better_city, String better_zip, String notes, String shopType, String deliveryHours
+    ){
+        this.betterLocation = new BetterLocation(pointName, distance, true, better_street, better_city, better_zip, notes, shopType, deliveryHours);
     }
 
     public BetterLocation getBetterLocation() {
@@ -55,23 +63,5 @@ public class Location {
         this.originalLocation = originalLocation;
     }
 
-    public String getShopType() {
-        String returnType;
 
-        switch(shopType) {
-            case "UPS": returnType = "UPS"; break;
-            case "POCZTA_POLSKA_ZABKA": returnType = "ZABKA"; break;
-            case "RUCH": returnType = "RUCH"; break;
-            case "POCZTA_POLSKA_ORLEN": returnType = "ORLEN"; break;
-            case "POCZTA_POLSKA": returnType = "POCZTA_POLSKA"; break;
-            case "PACZKOMAT": returnType = "PACZKOMAT"; break;
-            default: returnType = "null"; break;
-        }
-
-        return returnType;
-    }
-
-    public String getDeliveryHours() {
-        return this.deliveryHours;
-    }
 }
