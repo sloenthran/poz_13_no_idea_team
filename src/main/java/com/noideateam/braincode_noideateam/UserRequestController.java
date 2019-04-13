@@ -27,6 +27,7 @@ public class UserRequestController {
         return new UserRequestGeo(login, geoLength, geoWidth);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/all")
     List<User> all(){
         return userRepository.findAll();
@@ -46,11 +47,15 @@ public class UserRequestController {
         Optional<Map.Entry<CollectionPoint, Double>> closestPoint = collectionPoints.getClosest(tempUserChoice.getX(), tempUserChoice.getY());
 
         return new Location(
+                closestPoint.get().getKey().getName(),
                 closestPoint.get().getValue(),
+                true,
                 closestPoint.get().getKey().getAddress(),
                 closestPoint.get().getKey().getCity(),
                 closestPoint.get().getKey().getZipCode(),
-                closestPoint.get().getKey().getType()
+                closestPoint.get().getKey().getNotes(),
+                closestPoint.get().getKey().getType(),
+                closestPoint.get().getKey().getDeliveryHours()
         );
     }
 
@@ -104,10 +109,11 @@ public class UserRequestController {
                     closestPoint.get().getKey().getCity(),
                     closestPoint.get().getKey().getZipCode(),
                     closestPoint.get().getKey().getNotes(),
-                    closestPoint.get().getKey().getType()
+                    closestPoint.get().getKey().getType(),
+                    closestPoint.get().getKey().getDeliveryHours()
             );
         } else{
-            return new Location( distanceToChosenPoint, chosen_street, chosen_city, chosen_zip, null);
+            return new Location( distanceToChosenPoint, chosen_street, chosen_city, chosen_zip, null, null);
         }
     }
 
