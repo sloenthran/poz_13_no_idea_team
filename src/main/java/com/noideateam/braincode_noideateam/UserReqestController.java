@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class UserReqestController {
@@ -71,7 +72,7 @@ public class UserReqestController {
 //    }
 
     @GetMapping("/request/{id}")
-    User one(@PathVariable Long id) throws IOException {
+    Location one(@PathVariable Long id) throws IOException {
 
         User tempUser = new User(
           userRepository.findById(id).get().getLogin(),
@@ -90,15 +91,20 @@ public class UserReqestController {
         CollectionPoints collectionPoints = new CollectionPoints();
 
 
-        Map<CollectionPoint, Double> result= CollectionPoints.collectionPointsInRange(tempUserGeo.getX(), tempUserGeo.getY(), 10);
-        result.forEach((key,value) -> {
-            System.out.println("key = " + key.getName() + " " + value);
-        });
+//        Map<CollectionPoint, Double> result= CollectionPoints.collectionPointsInRange(tempUserGeo.getX(), tempUserGeo.getY(), 10);
+//        result.forEach((key,value) -> {
+//            System.out.println("key = " + key.getName() + " " + value);
+//        });
+        Optional<Map.Entry<CollectionPoint, Double>> closestPoint = collectionPoints.getClosest(tempUserGeo.getX(), tempUserGeo.getY());
 
         System.out.println("Finish");
 
-        return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
+//        return userRepository.findById(id)
+//                .orElseThrow(() -> new UserNotFoundException(id));
+        Location toSend = new Location(closestPoint.get().getKey().getName(), closestPoint.get().getValue());
+
+        return toSend;
+
     }
 
     @PutMapping("/employees/{id}")
