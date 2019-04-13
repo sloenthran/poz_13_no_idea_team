@@ -1,7 +1,6 @@
 package com.noideateam.braincode_noideateam;
 
 
-import com.noideateam.braincode_noideateam.generategeoindex.CollectionPoints;
 import com.noideateam.braincode_noideateam.generategeoindex.GenerateGeoIndex;
 import com.noideateam.braincode_noideateam.generategeoindex.opencagedata.ReturnGenerateGeoIndex;
 import org.springframework.web.bind.annotation.*;

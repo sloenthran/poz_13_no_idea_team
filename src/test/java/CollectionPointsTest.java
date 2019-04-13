@@ -1,12 +1,8 @@
-package com.noideateam.braincode_noideateam.generategeoindex;
-
 import com.noideateam.braincode_noideateam.CollectionPoint;
+import com.noideateam.braincode_noideateam.CollectionPoints;
 import org.junit.Test;
 
-import java.util.Collection;
 import java.util.Map;
-
-import static org.junit.Assert.*;
 
 public class CollectionPointsTest {
 
