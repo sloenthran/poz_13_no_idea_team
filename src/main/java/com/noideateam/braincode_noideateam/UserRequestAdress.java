@@ -4,13 +4,11 @@ import com.noideateam.braincode_noideateam.generategeoindex.GenerateGeoIndex;
 import com.noideateam.braincode_noideateam.generategeoindex.opencagedata.ReturnGenerateGeoIndex;
 
 public class UserRequestAdress {
-
     private String login;
     private String street;
     private String city;
     private String zip;
     private ReturnGenerateGeoIndex geoIndex;
-
 
     public UserRequestAdress(String login, String street, String city, String zip) {
         this.login = login;

@@ -16,8 +16,7 @@ public class GenerateGeoIndex {
 
     public ReturnGenerateGeoIndex askOpenCageData() {
         String street = this.street.replace(" ","+");
-        Query query = new Query();
-        return query.ask(street + "+" + city + "+" + zipCode.getZipCode());
+        return Query.ask(street + "+" + city + "+" + zipCode.getZipCode());
     }
 
     public ReturnGenerateGeoIndex generate() {

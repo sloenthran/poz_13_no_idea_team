@@ -1,7 +1,6 @@
 package com.noideateam.braincode_noideateam.getpointlist.inpost;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 public class Response {
