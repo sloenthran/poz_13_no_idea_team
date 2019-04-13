@@ -1,5 +1,3 @@
-package com.noideateam.braincode_noideateam.generategeoindex;
-
 import com.noideateam.braincode_noideateam.CollectionPoint;
 import com.noideateam.braincode_noideateam.CollectionPoints;
 import org.junit.Test;
