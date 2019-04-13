@@ -3,6 +3,7 @@ package com.noideateam.braincode_noideateam;
 
 import com.noideateam.braincode_noideateam.generategeoindex.GenerateGeoIndex;
 import com.noideateam.braincode_noideateam.generategeoindex.opencagedata.ReturnGenerateGeoIndex;
+import com.noideateam.braincode_noideateam.restreturn.Location;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
