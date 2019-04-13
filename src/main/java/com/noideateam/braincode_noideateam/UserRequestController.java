@@ -17,6 +17,7 @@ public class UserRequestController {
         this.userRepository = repository;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/requestwithgeo")
     public UserRequestGeo userRequestGeo(
             @RequestParam(value = "login", defaultValue = "User") String login,
@@ -31,6 +32,7 @@ public class UserRequestController {
         return userRepository.findAll();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/request")
     Location getWithoutDatabase(
             @RequestParam("chosen_street") String chosen_street,
@@ -46,11 +48,13 @@ public class UserRequestController {
         return new Location(closestPoint.get().getKey().getName(), closestPoint.get().getValue());
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/request")
     User newUser(@RequestBody User newEmployee) {
         return userRepository.save(newEmployee);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/request/{id}/")
     Location one(
             @PathVariable Long id,
@@ -89,6 +93,7 @@ public class UserRequestController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @PutMapping("/employees/{id}")
     User replaceEmployee(@RequestBody User newUser, @PathVariable Long id) {
 
@@ -106,6 +111,7 @@ public class UserRequestController {
                 });
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/employees/{id}")
     void deleteEmployee(@PathVariable Long id) {
         userRepository.deleteById(id);
