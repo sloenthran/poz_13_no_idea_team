@@ -17,7 +17,7 @@ public class UserRequestController {
         this.userRepository = repository;
     }
 
-    @CrossOrigin(origins = "*")
+    /*@CrossOrigin(origins = "*")
     @GetMapping("/requestwithgeo")
     public UserRequestGeo userRequestGeo(
             @RequestParam(value = "login", defaultValue = "User") String login,
@@ -25,7 +25,7 @@ public class UserRequestController {
             @RequestParam(value = "geoWidth", defaultValue = "0.0") float geoWidth
     ){
         return new UserRequestGeo(login, geoLength, geoWidth);
-    }
+    }*/
 
     @CrossOrigin(origins = "*")
     @GetMapping("/all")
@@ -43,20 +43,25 @@ public class UserRequestController {
         GenerateGeoIndex ggi = new GenerateGeoIndex(chosen_street, chosen_city, chosen_zip);
         ReturnGenerateGeoIndex tempUserChoice = ggi.generate();
 
-        CollectionPoints collectionPoints = new CollectionPoints();
-        Optional<Map.Entry<CollectionPoint, Double>> closestPoint = collectionPoints.getClosest(tempUserChoice.getX(), tempUserChoice.getY());
+        if (tempUserChoice == null) {
+            return new Location(null, -1, false, null, null, null, null, null, null);
+        } else {
 
-        return new Location(
-                closestPoint.get().getKey().getName(),
-                closestPoint.get().getValue(),
-                true,
-                closestPoint.get().getKey().getAddress(),
-                closestPoint.get().getKey().getCity(),
-                closestPoint.get().getKey().getZipCode(),
-                closestPoint.get().getKey().getNotes(),
-                closestPoint.get().getKey().getType(),
-                closestPoint.get().getKey().getDeliveryHours()
-        );
+            CollectionPoints collectionPoints = new CollectionPoints();
+            Optional<Map.Entry<CollectionPoint, Double>> closestPoint = collectionPoints.getClosest(tempUserChoice.getX(), tempUserChoice.getY());
+
+            return new Location(
+                    closestPoint.get().getKey().getName(),
+                    closestPoint.get().getValue(),
+                    true,
+                    closestPoint.get().getKey().getAddress(),
+                    closestPoint.get().getKey().getCity(),
+                    closestPoint.get().getKey().getZipCode(),
+                    closestPoint.get().getKey().getNotes(),
+                    closestPoint.get().getKey().getType(),
+                    closestPoint.get().getKey().getDeliveryHours()
+            );
+        }
     }
 
     @CrossOrigin(origins = "*")
@@ -65,7 +70,7 @@ public class UserRequestController {
         return userRepository.save(newEmployee);
     }
 
-    @CrossOrigin(origins = "*")
+    /*@CrossOrigin(origins = "*")
     @GetMapping("/request/{id}/")
     Location one(
             @PathVariable Long id,
@@ -139,5 +144,5 @@ public class UserRequestController {
     @DeleteMapping("/employees/{id}")
     void deleteEmployee(@PathVariable Long id) {
         userRepository.deleteById(id);
-    }
+    }*/
 }
