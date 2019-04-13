@@ -8,7 +8,7 @@ public class Query {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        String fooResourceUrl = "https://api-shipx-pl.easypack24.net/v1/points?&per_page=10000";
+        String fooResourceUrl = "https://api-shipx-pl.easypack24.net/v1/points?&per_page=10000&fields=location,address_details";
         Response response = restTemplate.getForObject(fooResourceUrl, Response.class);
 
         System.out.println(response);
