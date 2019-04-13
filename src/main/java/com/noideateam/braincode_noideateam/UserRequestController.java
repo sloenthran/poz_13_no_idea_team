@@ -43,7 +43,12 @@ public class UserRequestController {
         CollectionPoints collectionPoints = new CollectionPoints();
         Optional<Map.Entry<CollectionPoint, Double>> closestPoint = collectionPoints.getClosest(tempUserChoice.getX(), tempUserChoice.getY());
 
-        return new Location(closestPoint.get().getKey().getName(), closestPoint.get().getValue());
+        return new Location(
+                closestPoint.get().getValue(),
+        closestPoint.get().getKey().getAddress(),
+                closestPoint.get().getKey().getCity(),
+                closestPoint.get().getKey().getZipCode())
+        ;
     }
 
     @PostMapping("/request")
@@ -83,9 +88,20 @@ public class UserRequestController {
         if (distanceToChosenPoint > closestPoint.get().getValue()){
             suggest = true;
             System.out.println("Suggest is true");
-            return new Location(closestPoint.get().getKey().getName(), closestPoint.get().getValue(), chosen_street, distanceToChosenPoint);
+            return new Location(
+                    closestPoint.get().getKey().getName(),
+                    closestPoint.get().getValue(),
+                    distanceToChosenPoint,
+                    chosen_street,
+                    chosen_city,
+                    chosen_zip,
+                    closestPoint.get().getKey().getAddress(),
+                    closestPoint.get().getKey().getCity(),
+                    closestPoint.get().getKey().getZipCode()
+
+            );
         } else{
-            return new Location(chosen_street, distanceToChosenPoint);
+            return new Location( distanceToChosenPoint, chosen_street, chosen_city, chosen_zip);
         }
     }
 

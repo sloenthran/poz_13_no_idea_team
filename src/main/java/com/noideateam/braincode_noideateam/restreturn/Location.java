@@ -5,13 +5,31 @@ public class Location {
     private OriginalLocation originalLocation;
 
 
-    public Location(String name, double distance) {
-        this.originalLocation = new OriginalLocation(name, distance);
+    public Location(double distance, String original_street, String original_city, String original_zip) {
+        this.originalLocation = new OriginalLocation(
+//                name,
+                distance,
+                original_street,
+                original_city,
+                original_zip);
     }
 
-    public Location(String better_names, double better_distance, String original_name, double original_distance){
-        this.originalLocation = new OriginalLocation(original_name, original_distance);
-        this.betterLocation = new BetterLocation(better_names, better_distance, true);
+    public Location(String better_names,
+                    double better_distance,
+//                    String original_name,
+                    double original_distance,
+                    String original_street,
+                    String original_city,
+                    String original_zip,
+                    String better_street,
+                    String better_city,
+                    String better_zip
+
+                    ){
+        this.originalLocation = new OriginalLocation(original_distance, original_street, original_city, original_zip);
+
+
+        this.betterLocation = new BetterLocation(better_names, better_distance, true, better_street, better_city, better_zip);
     }
 
     public BetterLocation getBetterLocation() {
