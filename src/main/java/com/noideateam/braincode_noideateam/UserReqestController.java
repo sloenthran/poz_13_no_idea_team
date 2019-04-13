@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class UserReqestController {
@@ -69,8 +70,13 @@ public class UserReqestController {
 //                .orElseThrow(() -> new UserNotFoundException(id));
 //    }
 
-    @GetMapping("/request/{id}")
-    User one(@PathVariable Long id) throws IOException {
+    @GetMapping("/request/{id}/{chosen_street}/{chosen_city}/{chosen_zip}")
+    Location one(
+            @PathVariable Long id,
+            @PathVariable String chosen_street,
+            @PathVariable String chosen_city,
+            @PathVariable String chosen_zip
+    ) throws IOException {
 
         User tempUser = new User(
           userRepository.findById(id).get().getLogin(),
@@ -84,20 +90,41 @@ public class UserReqestController {
         GenerateGeoIndex ggi = new GenerateGeoIndex(tempUser.getStreet(), tempUser.getCity(), tempUser.getZip());
         ReturnGenerateGeoIndex tempUserGeo = ggi.generate();
 
+
+        ggi = new GenerateGeoIndex(chosen_street, chosen_city, chosen_zip);
+        ReturnGenerateGeoIndex tempUserChoice = ggi.generate();
+
+        System.out.println("chosen: " + chosen_street + "\t" + tempUserChoice.getX() + "\t" + tempUserChoice.getY());
+
+
+        //TODO: check whether to suggest new location
+
+
+
         System.out.println(tempUserGeo.getX() + "\t" + tempUserGeo.getY());
 
         CollectionPoints collectionPoints = new CollectionPoints();
 
+        double distanceToChosenPoint = collectionPoints.getDistance(tempUserGeo.getX(), tempUserGeo.getY(), tempUserChoice.getX(), tempUserChoice.getY());
 
-        Map<CollectionPoint, Double> result= CollectionPoints.collectionPointsInRange(tempUserGeo.getX(), tempUserGeo.getY(), 10);
-        result.forEach((key,value) -> {
-            System.out.println("key = " + key.getName() + " " + value);
-        });
+        System.out.println("distanceToChosenPoint: " + distanceToChosenPoint);
+
+
+
+//        Map<CollectionPoint, Double> result= CollectionPoints.collectionPointsInRange(tempUserGeo.getX(), tempUserGeo.getY(), 10);
+//        result.forEach((key,value) -> {
+//            System.out.println("key = " + key.getName() + " " + value);
+//        });
+        Optional<Map.Entry<CollectionPoint, Double>> closestPoint = collectionPoints.getClosest(tempUserGeo.getX(), tempUserGeo.getY());
 
         System.out.println("Finish");
 
-        return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
+//        return userRepository.findById(id)
+//                .orElseThrow(() -> new UserNotFoundException(id));
+        Location toSend = new Location(closestPoint.get().getKey().getName(), closestPoint.get().getValue());
+
+        return toSend;
+
     }
 
     @PutMapping("/employees/{id}")

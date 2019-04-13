@@ -13,7 +13,7 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(UserRepository repository){
         return args -> {
-            System.out.println("preloading " + repository.save(new User("Bilbo Baggins", "Umultowska 10", "Poznań", "60-995")));
+            System.out.println("preloading " + repository.save(new User("Bilbo Baggins", "Szczepankowo 80", "Poznań", "61-310")));
             System.out.println("preloading " + repository.save(new User("Frodo Baggins", "Bukowa 8", "Poznań", "61-440")));
 
         };
