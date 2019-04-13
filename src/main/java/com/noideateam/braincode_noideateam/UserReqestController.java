@@ -54,15 +54,37 @@ public class UserReqestController {
         return userRepository.findAll();
     }
     @PostMapping("/request")
-    User newEmployee(@RequestBody User newEmployee) {
+    User newUser(@RequestBody User newEmployee) {
         return userRepository.save(newEmployee);
     }
 
 
-    @PostMapping("/request/{id}")
+    @GetMapping("/request/{id}")
     User one(@PathVariable Long id){
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    @PutMapping("/employees/{id}")
+    User replaceEmployee(@RequestBody User newUser, @PathVariable Long id) {
+
+        return userRepository.findById(id)
+                .map(user -> {
+                    user.setLogin(newUser.getLogin());
+                    user.setStreet(newUser.getStreet());
+                    user.setCity(newUser.getCity());
+                    user.setZip(newUser.getZip());
+                    return userRepository.save(user);
+                })
+                .orElseGet(() -> {
+                    newUser.setId(id);
+                    return userRepository.save(newUser);
+                });
+    }
+
+    @DeleteMapping("/employees/{id}")
+    void deleteEmployee(@PathVariable Long id) {
+        userRepository.deleteById(id);
     }
 
 
