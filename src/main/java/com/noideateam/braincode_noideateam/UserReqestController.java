@@ -140,7 +140,7 @@ public class UserReqestController {
         if (distanceToChosenPoint > closestPoint.get().getValue()){
             suggest = true;
             System.out.println("Suggest is true");
-            return new Location(chosen_street, distanceToChosenPoint ,closestPoint.get().getKey().getName(), closestPoint.get().getValue());
+            return new Location(closestPoint.get().getKey().getName(), closestPoint.get().getValue(), chosen_street, distanceToChosenPoint);
         } else{
             Location toSend = new Location(chosen_street, distanceToChosenPoint);
 
