@@ -3,7 +3,10 @@ package com.noideateam.braincode_noideateam;
 import com.noideateam.braincode_noideateam.generategeoindex.GenerateGeoIndex;
 import com.noideateam.braincode_noideateam.generategeoindex.opencagedata.ReturnGenerateGeoIndex;
 import com.noideateam.braincode_noideateam.restreturn.Location;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +47,9 @@ public class UserRequestController {
         ReturnGenerateGeoIndex tempUserChoice = ggi.generate();
 
         if (tempUserChoice == null) {
-            return new Location(null, -1, false, null, null, null, null, null, null);
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "You must give real address!"
+            );
         } else {
 
             CollectionPoints collectionPoints = new CollectionPoints();
