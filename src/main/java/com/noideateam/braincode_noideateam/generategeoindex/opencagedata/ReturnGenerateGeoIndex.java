@@ -1,10 +1,10 @@
 package com.noideateam.braincode_noideateam.generategeoindex.opencagedata;
 
-public class ReturnData {
+public class ReturnGenerateGeoIndex {
     private float x;
     private float y;
 
-    public ReturnData(float x, float y) {
+    public ReturnGenerateGeoIndex(float x, float y) {
         this.x = x;
         this.y = y;
     }
