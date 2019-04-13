@@ -59,8 +59,24 @@ public class UserReqestController {
     }
 
 
+//    @GetMapping("/request/{id}")
+//    User one(@PathVariable Long id){
+//        return userRepository.findById(id)
+//                .orElseThrow(() -> new UserNotFoundException(id));
+//    }
+
     @GetMapping("/request/{id}")
     User one(@PathVariable Long id){
+
+        User temp = new User(
+          userRepository.findById(id).get().getLogin(),
+          userRepository.findById(id).get().getStreet(),
+          userRepository.findById(id).get().getCity(),
+          userRepository.findById(id).get().getZip()
+        );
+
+        System.out.println(temp.getLogin() + ", " + temp.getStreet() + ", " + temp.getCity() + ", " + temp.getZip());
+
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
