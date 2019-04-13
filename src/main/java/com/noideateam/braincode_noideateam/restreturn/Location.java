@@ -23,13 +23,14 @@ public class Location {
                     String original_zip,
                     String better_street,
                     String better_city,
-                    String better_zip
+                    String better_zip,
+                    String better_notes
 
                     ){
         this.originalLocation = new OriginalLocation(original_distance, original_street, original_city, original_zip);
 
 
-        this.betterLocation = new BetterLocation(better_names, better_distance, true, better_street, better_city, better_zip);
+        this.betterLocation = new BetterLocation(better_names, better_distance, true, better_street, better_city, better_zip, better_notes);
     }
 
     public BetterLocation getBetterLocation() {
