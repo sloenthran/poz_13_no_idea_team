@@ -70,12 +70,12 @@ public class UserReqestController {
 //                .orElseThrow(() -> new UserNotFoundException(id));
 //    }
 
-    @GetMapping("/request/{id}/{chosen_street}/{chosen_city}/{chosen_zip}")
+    @GetMapping("/request/{id}/")
     Location one(
             @PathVariable Long id,
-            @PathVariable String chosen_street,
-            @PathVariable String chosen_city,
-            @PathVariable String chosen_zip
+            @RequestParam("chosen_street") String chosen_street,
+            @RequestParam("chosen_city") String chosen_city,
+            @RequestParam("chosen_zip") String chosen_zip
     ) throws IOException {
 
         User tempUser = new User(
@@ -85,6 +85,7 @@ public class UserReqestController {
           userRepository.findById(id).get().getZip()
         );
 
+        boolean suggest = false;
         System.out.println(tempUser.getId() + ", " +tempUser.getLogin() + ", " + tempUser.getStreet() + ", " + tempUser.getCity() + ", " + tempUser.getZip());
 
         GenerateGeoIndex ggi = new GenerateGeoIndex(tempUser.getStreet(), tempUser.getCity(), tempUser.getZip());
@@ -97,7 +98,7 @@ public class UserReqestController {
         System.out.println("chosen: " + chosen_street + "\t" + tempUserChoice.getX() + "\t" + tempUserChoice.getY());
 
 
-        //TODO: check whether to suggest new location
+
 
 
 
@@ -117,13 +118,21 @@ public class UserReqestController {
 //        });
         Optional<Map.Entry<CollectionPoint, Double>> closestPoint = collectionPoints.getClosest(tempUserGeo.getX(), tempUserGeo.getY());
 
-        System.out.println("Finish");
+        //TODO: check whether to suggest new location
+        if (distanceToChosenPoint > closestPoint.get().getValue()){
+            suggest = true;
+            System.out.println("Suggest is true");
+            return new Location(chosen_street, distanceToChosenPoint ,closestPoint.get().getKey().getName(), closestPoint.get().getValue());
+        } else{
+            Location toSend = new Location(chosen_street, distanceToChosenPoint);
+
+            return toSend;
+        }
+
 
 //        return userRepository.findById(id)
 //                .orElseThrow(() -> new UserNotFoundException(id));
-        Location toSend = new Location(closestPoint.get().getKey().getName(), closestPoint.get().getValue());
 
-        return toSend;
 
     }
 
