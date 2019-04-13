@@ -2,12 +2,14 @@ package com.noideateam.braincode_noideateam;
 
 import com.noideateam.braincode_noideateam.generategeoindex.GenerateGeoIndex;
 import com.noideateam.braincode_noideateam.generategeoindex.opencagedata.ReturnGenerateGeoIndex;
+import org.springframework.lang.Nullable;
 
 public class UserRequestAdress {
     private String login;
     private String street;
     private String city;
     private String zip;
+    @Nullable
     private ReturnGenerateGeoIndex geoIndex;
 
     public UserRequestAdress(String login, String street, String city, String zip) {
