@@ -71,8 +71,13 @@ public class UserReqestController {
 //                .orElseThrow(() -> new UserNotFoundException(id));
 //    }
 
-    @GetMapping("/request/{id}")
-    Location one(@PathVariable Long id) throws IOException {
+    @GetMapping("/request/{id}/{chosen_street}/{chosen_city}/{chosen_zip}")
+    Location one(
+            @PathVariable Long id,
+            @PathVariable String chosen_street,
+            @PathVariable String chosen_city,
+            @PathVariable String chosen_zip
+    ) throws IOException {
 
         User tempUser = new User(
           userRepository.findById(id).get().getLogin(),
@@ -86,9 +91,25 @@ public class UserReqestController {
         GenerateGeoIndex ggi = new GenerateGeoIndex(tempUser.getStreet(), tempUser.getCity(), tempUser.getZip());
         ReturnGenerateGeoIndex tempUserGeo = ggi.generate();
 
+
+        ggi = new GenerateGeoIndex(chosen_street, chosen_city, chosen_zip);
+        ReturnGenerateGeoIndex tempUserChoice = ggi.generate();
+
+        System.out.println("chosen: " + chosen_street + "\t" + tempUserChoice.getX() + "\t" + tempUserChoice.getY());
+
+
+        //TODO: check whether to suggest new location
+
+
+
         System.out.println(tempUserGeo.getX() + "\t" + tempUserGeo.getY());
 
         CollectionPoints collectionPoints = new CollectionPoints();
+
+        double distanceToChosenPoint = collectionPoints.getDistance(tempUserGeo.getX(), tempUserGeo.getY(), tempUserChoice.getX(), tempUserChoice.getY());
+
+        System.out.println("distanceToChosenPoint: " + distanceToChosenPoint);
+
 
 
 //        Map<CollectionPoint, Double> result= CollectionPoints.collectionPointsInRange(tempUserGeo.getX(), tempUserGeo.getY(), 10);

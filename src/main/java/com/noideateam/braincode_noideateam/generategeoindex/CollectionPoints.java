@@ -45,6 +45,15 @@ public class CollectionPoints {
         return result;
     }
 
+    public double getDistance(double sourceX, double sourceY, double tagetX, double targetY ){
+        LatLng sourcePoint = new LatLng(sourceX, sourceY);
+        LatLng targetPoint = new LatLng(tagetX, targetY);
+
+        return LatLngTool.distance(sourcePoint, targetPoint, LengthUnit.KILOMETER);
+    }
+
+
+
     public static Map<CollectionPoint, Double> collectionPointsInRange(double x, double y, float range){
         Map<CollectionPoint, Double> distances = collectionPointsDistanceToPoint(x, y);
         Map<CollectionPoint, Double> result = new HashMap<>();
