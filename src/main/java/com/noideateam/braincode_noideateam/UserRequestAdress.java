@@ -1,8 +1,5 @@
 package com.noideateam.braincode_noideateam;
 
-//import lombok.Data;
-
-
 import com.noideateam.braincode_noideateam.generategeoindex.GenerateGeoIndex;
 import com.noideateam.braincode_noideateam.generategeoindex.opencagedata.ReturnGenerateGeoIndex;
 
