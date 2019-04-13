@@ -1,6 +1,8 @@
 package com.noideateam.braincode_noideateam;
 
 
+import com.noideateam.braincode_noideateam.generategeoindex.GenerateGeoIndex;
+import com.noideateam.braincode_noideateam.generategeoindex.opencagedata.ReturnGenerateGeoIndex;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -68,14 +70,19 @@ public class UserReqestController {
     @GetMapping("/request/{id}")
     User one(@PathVariable Long id){
 
-        User temp = new User(
+        User tempUser = new User(
           userRepository.findById(id).get().getLogin(),
           userRepository.findById(id).get().getStreet(),
           userRepository.findById(id).get().getCity(),
           userRepository.findById(id).get().getZip()
         );
 
-        System.out.println(temp.getLogin() + ", " + temp.getStreet() + ", " + temp.getCity() + ", " + temp.getZip());
+        System.out.println(tempUser.getId() + ", " +tempUser.getLogin() + ", " + tempUser.getStreet() + ", " + tempUser.getCity() + ", " + tempUser.getZip());
+
+        GenerateGeoIndex ggi = new GenerateGeoIndex(tempUser.getStreet(), tempUser.getCity(), tempUser.getZip());
+        ReturnGenerateGeoIndex tempUserGeo = ggi.generate();
+
+        System.out.println(tempUserGeo.getX() + "\t" + tempUserGeo.getY());
 
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
