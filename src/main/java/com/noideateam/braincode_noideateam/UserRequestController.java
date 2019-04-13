@@ -10,10 +10,10 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-public class UserReqestController {
+public class UserRequestController {
     private final UserRepository userRepository;
 
-    UserReqestController(UserRepository repository){
+    UserRequestController(UserRepository repository){
         this.userRepository = repository;
     }
 
