@@ -1,5 +1,11 @@
 package com.noideateam.braincode_noideateam.getpointlist;
 
-public class GetPointList {
+import com.noideateam.braincode_noideateam.getpointlist.inpost.Query;
+import com.noideateam.braincode_noideateam.getpointlist.inpost.ReturnPointList;
 
+public class GetPointList {
+    public static ReturnPointList generate() {
+        Query query = new Query()
+        return query.ask();
+    }
 }
