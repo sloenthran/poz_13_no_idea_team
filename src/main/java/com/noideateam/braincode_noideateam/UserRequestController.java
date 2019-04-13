@@ -47,10 +47,13 @@ public class UserRequestController {
         Optional<Map.Entry<CollectionPoint, Double>> closestPoint = collectionPoints.getClosest(tempUserChoice.getX(), tempUserChoice.getY());
 
         return new Location(
+                closestPoint.get().getKey().getName(),
                 closestPoint.get().getValue(),
+                true,
                 closestPoint.get().getKey().getAddress(),
                 closestPoint.get().getKey().getCity(),
                 closestPoint.get().getKey().getZipCode(),
+                closestPoint.get().getKey().getNotes(),
                 closestPoint.get().getKey().getType(),
                 closestPoint.get().getKey().getDeliveryHours()
         );
