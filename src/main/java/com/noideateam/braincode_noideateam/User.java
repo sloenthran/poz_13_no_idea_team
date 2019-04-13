@@ -1,24 +1,27 @@
 package com.noideateam.braincode_noideateam;
 
-//import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-public class UserRequestAdress {
-
+@Entity
+public class User {
+    private @Id @GeneratedValue Long id;
     private String login;
     private String street;
     private String city;
     private String zip;
 
 
-    public UserRequestAdress(String login, String street, String city, String zip) {
+    public User(String login, String street, String city, String zip) {
         this.login = login;
         this.street = street;
         this.city = city;
         this.zip = zip;
-
-
     }
+
+    public User(){}
 
     public String getLogin() {
         return login;
