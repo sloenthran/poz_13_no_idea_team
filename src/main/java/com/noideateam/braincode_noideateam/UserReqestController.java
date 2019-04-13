@@ -1,9 +1,14 @@
 package com.noideateam.braincode_noideateam;
 
 
+import com.noideateam.braincode_noideateam.generategeoindex.CollectionPoints;
+import com.noideateam.braincode_noideateam.generategeoindex.GenerateGeoIndex;
+import com.noideateam.braincode_noideateam.generategeoindex.opencagedata.ReturnGenerateGeoIndex;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserReqestController {
@@ -59,8 +64,39 @@ public class UserReqestController {
     }
 
 
+//    @GetMapping("/request/{id}")
+//    User one(@PathVariable Long id){
+//        return userRepository.findById(id)
+//                .orElseThrow(() -> new UserNotFoundException(id));
+//    }
+
     @GetMapping("/request/{id}")
-    User one(@PathVariable Long id){
+    User one(@PathVariable Long id) throws IOException {
+
+        User tempUser = new User(
+          userRepository.findById(id).get().getLogin(),
+          userRepository.findById(id).get().getStreet(),
+          userRepository.findById(id).get().getCity(),
+          userRepository.findById(id).get().getZip()
+        );
+
+        System.out.println(tempUser.getId() + ", " +tempUser.getLogin() + ", " + tempUser.getStreet() + ", " + tempUser.getCity() + ", " + tempUser.getZip());
+
+        GenerateGeoIndex ggi = new GenerateGeoIndex(tempUser.getStreet(), tempUser.getCity(), tempUser.getZip());
+        ReturnGenerateGeoIndex tempUserGeo = ggi.generate();
+
+        System.out.println(tempUserGeo.getX() + "\t" + tempUserGeo.getY());
+
+        CollectionPoints collectionPoints = new CollectionPoints();
+
+
+        Map<CollectionPoint, Double> result= CollectionPoints.collectionPointsInRange(tempUserGeo.getX(), tempUserGeo.getY(), 10);
+        result.forEach((key,value) -> {
+            System.out.println("key = " + key.getName() + " " + value);
+        });
+
+        System.out.println("Finish");
+
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
