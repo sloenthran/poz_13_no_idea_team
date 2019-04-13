@@ -2,15 +2,15 @@ package com.noideateam.braincode_noideateam;
 
 public class CollectionPoint {
     //Typ	Nazwa	Adres	Kod pocztowy	Miasto	Szerokość geograficzna	Długość geograficzna	Godziny odbioru	Uwagi
-    String type;
-    String name;
-    String address;
-    String zipCode;
-    String city;
-    Double latitude; // szerokość
-    Double longitude; // długość
-    String deliveryHours;
-    String notes;
+    private String type;
+    private String name;
+    private String address;
+    private String zipCode;
+    private String city;
+    private Double latitude; // szerokość
+    private Double longitude; // długość
+    private String deliveryHours;
+    private String notes;
 
     public String getType() {
         return type;
@@ -83,7 +83,6 @@ public class CollectionPoint {
     public void setNotes(String notes) {
         this.notes = notes;
     }
-
 
     public CollectionPoint(String type, String name, String address, String zipCode, String city, String latitude, String longitude, String deliveryHours, String notes) {
         this.type = type;
