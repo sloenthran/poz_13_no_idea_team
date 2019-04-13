@@ -5,7 +5,7 @@ import com.noideateam.braincode_noideateam.getpointlist.inpost.ReturnPointList;
 
 public class GetPointList {
     public static ReturnPointList generate() {
-        Query query = new Query()
+        Query query = new Query();
         return query.ask();
     }
 }
