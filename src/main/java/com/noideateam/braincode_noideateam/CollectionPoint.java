@@ -3,6 +3,14 @@ package com.noideateam.braincode_noideateam;
 public class CollectionPoint {
     //Typ	Nazwa	Adres	Kod pocztowy	Miasto	Szerokość geograficzna	Długość geograficzna	Godziny odbioru	Uwagi
     String type;
+    String name;
+    String address;
+    String zipCode;
+    String city;
+    float latitude; // szerokość
+    float longitude; // długość
+    String deliveryHours;
+    String notes;
 
     public String getType() {
         return type;
@@ -44,20 +52,20 @@ public class CollectionPoint {
         this.city = city;
     }
 
-    public String getLatitude() {
+    public float getLatitude() {
         return latitude;
     }
 
     public void setLatitude(String latitude) {
-        this.latitude = latitude;
+        this.latitude = Float.parseFloat(latitude);
     }
 
-    public String getLongitude() {
+    public float getLongitude() {
         return longitude;
     }
 
     public void setLongitude(String longitude) {
-        this.longitude = longitude;
+        this.longitude = Float.parseFloat(longitude);
     }
 
     public String getDeliveryHours() {
@@ -76,35 +84,15 @@ public class CollectionPoint {
         this.notes = notes;
     }
 
-    String name;
-    String address;
-    String zipCode;
-    String city;
-    String latitude; // szerokość
-    String longitude; // długość
-    String deliveryHours;
-    String notes;
 
-    /**
-     *
-     * @param type
-     * @param name
-     * @param address
-     * @param zipCode
-     * @param city
-     * @param latitude
-     * @param longitude
-     * @param deliveryHours
-     * @param notes
-     */
     public CollectionPoint(String type, String name, String address, String zipCode, String city, String latitude, String longitude, String deliveryHours, String notes) {
         this.type = type;
         this.name = name;
         this.address = address;
         this.zipCode = zipCode;
         this.city = city;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.latitude = Float.parseFloat(latitude);
+        this.longitude = Float.parseFloat(longitude);
         this.deliveryHours = deliveryHours;
         this.notes = notes;
     }
