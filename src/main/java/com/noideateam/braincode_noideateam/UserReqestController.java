@@ -54,10 +54,28 @@ public class UserReqestController {
 //    }
 
 
-    @GetMapping("/request")
+    @GetMapping("/all")
     List<User> all(){
         return userRepository.findAll();
     }
+
+    @GetMapping("/request")
+    Location getWithoutDatabase(
+            @RequestParam("chosen_street") String chosen_street,
+            @RequestParam("chosen_city") String chosen_city,
+            @RequestParam("chosen_zip") String chosen_zip
+    ) throws IOException {
+        GenerateGeoIndex ggi = new GenerateGeoIndex(chosen_street, chosen_city, chosen_zip);
+        ReturnGenerateGeoIndex tempUserChoice = ggi.generate();
+
+        CollectionPoints collectionPoints = new CollectionPoints();
+        Optional<Map.Entry<CollectionPoint, Double>> closestPoint = collectionPoints.getClosest(tempUserChoice.getX(), tempUserChoice.getY());
+
+
+        return new Location(closestPoint.get().getKey().getName(), closestPoint.get().getValue());
+
+    }
+
     @PostMapping("/request")
     User newUser(@RequestBody User newEmployee) {
         return userRepository.save(newEmployee);
