@@ -7,8 +7,8 @@ public class CollectionPoint {
     String address;
     String zipCode;
     String city;
-    float latitude; // szerokość
-    float longitude; // długość
+    Double latitude; // szerokość
+    Double longitude; // długość
     String deliveryHours;
     String notes;
 
@@ -52,20 +52,20 @@ public class CollectionPoint {
         this.city = city;
     }
 
-    public float getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
     public void setLatitude(String latitude) {
-        this.latitude = Float.parseFloat(latitude);
+        this.latitude = Double.valueOf(latitude);
     }
 
-    public float getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
     public void setLongitude(String longitude) {
-        this.longitude = Float.parseFloat(longitude);
+        this.longitude = Double.valueOf(longitude);
     }
 
     public String getDeliveryHours() {
@@ -91,8 +91,8 @@ public class CollectionPoint {
         this.address = address;
         this.zipCode = zipCode;
         this.city = city;
-        this.latitude = Float.parseFloat(latitude);
-        this.longitude = Float.parseFloat(longitude);
+        this.latitude = Double.valueOf(latitude);
+        this.longitude = Double.valueOf(longitude);
         this.deliveryHours = deliveryHours;
         this.notes = notes;
     }
