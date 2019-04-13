@@ -1,9 +1,8 @@
-package com.noideateam.braincode_noideateam.generategeoindex;
+package com.noideateam.braincode_noideateam;
 
 import com.javadocmd.simplelatlng.LatLng;
 import com.javadocmd.simplelatlng.LatLngTool;
 import com.javadocmd.simplelatlng.util.LengthUnit;
-import com.noideateam.braincode_noideateam.CollectionPoint;
 import com.opencsv.CSVReader;
 
 import java.io.FileReader;

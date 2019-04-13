@@ -1,8 +1,5 @@
 package com.noideateam.braincode_noideateam;
 
-import com.javadocmd.simplelatlng.LatLng;
-import com.noideateam.braincode_noideateam.generategeoindex.CollectionPoints;
-
 import java.io.IOException;
 import java.util.Map;
 
